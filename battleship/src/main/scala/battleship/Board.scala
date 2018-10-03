@@ -1,11 +1,10 @@
 package battleship
 
 
-case class Board (grid : List[List[Int]]){
+case class Board (grid : List[List[Int]] = List.fill(10)(List.fill(10)(0))){
 
   /**
     * Function to check if the ship can be placed on the board
-    *
     * @param ship : the ship to check
     * @return : true if it can be placed otherwise false
     */
@@ -34,7 +33,6 @@ case class Board (grid : List[List[Int]]){
 
   /**
     * Function to know of a ship overpass on another
-    *
     * @param ship      : the Ship to test
     * @param shipCoord : the List of x coordinates for horizontal ship, the List of y coordinates for vertical ship
     * @param overPass  : the Boolean to know if the ship overpass
@@ -56,7 +54,6 @@ case class Board (grid : List[List[Int]]){
 
   /**
     * Function to create the List of coordinate that will be added to the grid
-    *
     * @param shiplist  : the List of Int which will be added in the Board grid
     * @param shipCoord : the List of x coordinates of the ship to add
     * @param ship      : the ship to add
@@ -74,7 +71,6 @@ case class Board (grid : List[List[Int]]){
 
   /**
     * Function to place an horizontal ship on the board
-    *
     * @param ship : the Ship to add
     * @return : the new Board with the number of the ship at his coordinates
     */
@@ -99,10 +95,8 @@ case class Board (grid : List[List[Int]]){
         }
 
   }
-
   /**
     * Function to create the list of list with the number of the ship at his coordinates
-    *
     * @param shiplist : the List of List of Int which will be filled with the ship's number where it's necessary
     * @param iterator : the iterator if
     * @param ship     : the Ship to place
@@ -120,8 +114,7 @@ case class Board (grid : List[List[Int]]){
   }
 
   /**
-    * Functoin to add a vertical ship to the grid
-    *
+    * Function to add a vertical ship to the grid
     * @param grid     : a List of List of Int that will be updated with the List from shipList
     * @param shiplist : a List of List of Int which has the ship's number at y ship coordinates
     * @param ship     : the Ship to add
@@ -140,7 +133,6 @@ case class Board (grid : List[List[Int]]){
 
   /**
     * Function to know if a shot as hit a ship or not
-    *
     * @param xShot : x coordinate of the shot
     * @param yShot : y coordinate of the shot
     * @return : true if the shot as hit a ship, otherwise false
@@ -155,7 +147,6 @@ case class Board (grid : List[List[Int]]){
 
   /**
     * Function to update the grid after a shot with -1 at shot coordinates
-    *
     * @param xShot : x coordinate of the shot
     * @param yShot : y coordinate of the shot
     * @return : the new Board updated with -1 at the shot coordinates
@@ -169,7 +160,6 @@ case class Board (grid : List[List[Int]]){
 
   /**
     * Function to know if there still is ship on the board
-    *
     * @return : true if there still is ship on the board, false otherwise
     */
   def as_Ship(): Boolean = {

@@ -3,9 +3,8 @@ package battleship
 import org.scalatest._
 
 class PlayerSpec extends FlatSpec with Matchers {
-  val firstGrid : List[List[Int]] = List.fill(10)(List.fill(10)(0))
-  val shipGrid : Board = Board(firstGrid)
-  val shotGrid : Board = Board(firstGrid)
+  val shipGrid : Board = Board()
+  val shotGrid : Board = Board()
   val shipGrid2 : Board = Board(List(List(0,0,0,0,-1,0,0,0,0,0),List(0,4,4,4,-1,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,1,0,0,0,0,0,0),List(0,0,0,1,0,0,0,0,0,0),List(0,0,0,0,0,-1,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0)))
   val shotGrid2 : Board = Board(List(List(0,0,0,0,0,-1,0,0,0,0),List(0,0,0,0,-1,0,0,0,0,0),List(0,0,0,0,-1,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,-1,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,-1,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0)))
   val player : Player = Player(shipGrid, shotGrid)

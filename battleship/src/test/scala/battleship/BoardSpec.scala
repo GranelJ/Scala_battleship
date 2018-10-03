@@ -4,7 +4,7 @@ import org.scalatest._
 
 class BoardSpec extends FlatSpec with Matchers {
   val firstGrid : List[List[Int]] = List.fill(10)(List.fill(10)(0))
-  val board : Board = Board(firstGrid)
+  val board : Board = Board()
   val boardTest : Board = Board(List(List(0,0,0,0,0,0,0,0,0,0),List(0,4,4,4,4,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0)))
 
   "The Board object" should "be a list of list 10x10" in {
