@@ -110,4 +110,12 @@ case class Board (grid : List[List[Int]]){
             return false
         }
     }
+
+    //Funtion to update the grid after a shot with -1 at shot coordinates
+    def Update_Grid_After_Shot(xShot : Int, yShot : Int) : Board = {
+        //create new list to update grid
+        val nList = this.grid(yShot).updated(xShot, -1)
+        val nGrid = this.grid.updated(yShot, nList)
+        return Board(nGrid)
+    }
 }

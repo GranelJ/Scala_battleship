@@ -83,10 +83,17 @@ class BoardSpec extends FlatSpec with Matchers {
     board.Add_ship(shipInHorizontal) shouldEqual Board(List(List(0,0,0,0,0,0,0,0,0,0),List(0,4,4,4,4,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0)))
    }
 
-   "The Board Shot_As_Hit method" should "return true if there is a ship where we have shot" in {
+  "The Board Shot_As_Hit method" should "return true if there is a ship where we have shot" in {
     board.Shot_As_Hit(5, 3) shouldEqual false
     boardTest.Shot_As_Hit(4, 8) shouldEqual false
     boardTest.Shot_As_Hit(1,1) shouldEqual true
     boardTest2.Shot_As_Hit(1,2) shouldEqual true
+   }
+
+  "The Board Update_Grid_After_Shot method" should "return the new grid with -1 where we have shot" in {
+    board.Update_Grid_After_Shot(5,3) shouldEqual Board(List(List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,-1,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0)))
+    boardTest.Update_Grid_After_Shot(4,8) shouldEqual Board(List(List(0,0,0,0,0,0,0,0,0,0),List(0,4,4,4,4,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,-1,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0)))
+    boardTest.Update_Grid_After_Shot(1,1) shouldEqual Board(List(List(0,0,0,0,0,0,0,0,0,0),List(0,-1,4,4,4,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0)))
+    boardTest2.Update_Grid_After_Shot(1,2) shouldEqual Board(List(List(0,0,0,0,0,0,0,0,0,0),List(0,4,0,0,0,0,0,0,0,0),List(0,-1,0,0,0,0,0,0,0,0),List(0,4,0,0,0,0,0,0,0,0),List(0,4,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0)))
    }
 }
