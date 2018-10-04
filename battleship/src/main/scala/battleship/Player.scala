@@ -21,10 +21,10 @@ case class Player(shipBoard : Board, shotBoard: Board, iA : Int = 0){
   def create_Ship(x : Option[Int] , y: Option[Int], orientation: String, name : String): Option[Player] = {
     if(!x.isEmpty){
       if(!y.isEmpty){
-        val inputOrientation = true
+        var inputOrientation = true
         orientation match {
-          case "H" => val inputOrientation = true
-          case "V" => val inputOrientation = false
+          case "H" => inputOrientation = true
+          case "V" => inputOrientation = false
           case _ => None
         }
         val ship = Ship(x.get, y.get, inputOrientation, name)
@@ -39,5 +39,9 @@ case class Player(shipBoard : Board, shotBoard: Board, iA : Int = 0){
       return None
     }
     return None
+  }
+
+  def shot(x : Int,  y: Int): Unit ={
+
   }
 }

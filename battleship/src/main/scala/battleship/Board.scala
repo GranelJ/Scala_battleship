@@ -79,14 +79,14 @@ case class Board (grid : List[List[Int]] = List.fill(10)(List.fill(10)(0))){
             //list of the coordinate of the ship
             val shipCoord = List.range(ship.x, ship.x + ship.size())
             //list that will be updated and then placed in the grid
-            val tempShipList = List.fill(10)(0)
+            val tempShipList = this.grid(ship.y)
             //the updated list
             val shiplist = create_Ship_List_Horizontal(tempShipList, shipCoord, ship)
             //update the grid with the new list
             val nGrid = this.grid.updated(ship.y, shiplist)
             return Board(nGrid)
         }else{
-            val tempShiplist = List.fill(ship.size())(List.fill(10)(0))
+            val tempShiplist = this.grid.slice(ship.y, ship.y + ship.size())
             //get the list of list to update the grid
             val shiplist = create_Ship_List_Vertical(tempShiplist, 0, ship)
             //create the updated grid
@@ -106,7 +106,7 @@ case class Board (grid : List[List[Int]] = List.fill(10)(List.fill(10)(0))){
         if(iterator == ship.size()){
             return shiplist
         }else{
-            val list = List.fill(10)(0)
+            val list = shiplist(iterator)
             val tempList = list.updated(ship.x, ship.number())
             val nshiplist = shiplist.updated(iterator, tempList)
           create_Ship_List_Vertical(nshiplist, iterator + 1, ship)
@@ -125,7 +125,7 @@ case class Board (grid : List[List[Int]] = List.fill(10)(List.fill(10)(0))){
             return grid
         }else{
             //update the grid with the new line with the last list of the shiplist
-            val nGrid = grid.updated(ship.y + shiplist.size-1, shiplist(shiplist.size-1))
+            val nGrid = grid.updated(ship.y + shiplist.size-1, shiplist.last)
             val nshiplist = shiplist.init
           add_Vertical_Ship_In_Grid(nGrid, nshiplist, ship)
         }

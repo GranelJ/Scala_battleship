@@ -45,7 +45,7 @@ object Util {
     * @param name : the name of the Ship for which we are asking the coordinate
     */
   def promptAskXCoord(name : String) : Unit = {
-    print(s"""Please enter the X coordinate of your ${name} between 1 and 10""")
+    print(s"Please enter the X coordinate of your ${name} between 0 and 9\n")
   }
 
   /**
@@ -53,7 +53,7 @@ object Util {
     * @param name : the name of the Ship for which we are asking the coordinate
     */
   def promptAskYCoord(name : String) : Unit = {
-    print(s"""Please enter the Y coordinate of your ${name} between 1 and 10""")
+    print(s"Please enter the Y coordinate of your ${name} between 0 and 9\n")
   }
 
   /**
@@ -61,7 +61,7 @@ object Util {
     * @param name : the name of the Ship for which we are asking the orientation
     */
   def promptAskOrientationCoord(name : String) : Unit = {
-    print(s"""Please enter the orientation coordinate of your ${name}, 'H' for horizontal and 'V' for vertical""")
+    print(s"Please enter the orientation coordinate of your ${name}, 'H' for horizontal and 'V' for vertical\n")
   }
 
   /**
