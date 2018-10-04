@@ -63,4 +63,30 @@ object Util {
   def promptAskOrientationCoord(name : String) : Unit = {
     print(s"""Please enter the orientation coordinate of your ${name}, 'H' for horizontal and 'V' for vertical""")
   }
+
+  /**
+    * Function to prompt the boards of the player
+    * @param player : the player for which we want to prompt the board
+    */
+  def promptBoards(player : Player) : Unit = {
+    print("\nShip Board\n")
+    val xCoord = List.range(0,10)
+    print("    ")
+    xCoord.foreach(x => print(x + " "))
+    println()
+    print("    - - - - - - - - - -")
+    println()
+    player.shipBoard.grid.zipWithIndex.foreach{case(list,index) =>{print(index + " | ")
+    list.foreach(x => print(x + " "))
+    println()}}
+    print("\n Shot Board\n")
+    print("    ")
+    xCoord.foreach(x=>print(x + " "))
+    println()
+    print("    - - - - - - - - - -")
+    println()
+    player.shotBoard.grid.zipWithIndex.foreach{case(list,index) =>{print(index + " | ")
+    list.foreach(x => print(x + " "))
+    println()}}
+  }
 }
