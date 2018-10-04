@@ -1,6 +1,6 @@
 package battleship
 
-import scala.util.Try
+import scala.util.{Random, Try}
 import scala.io.StdIn.readLine
 
 object Util {
@@ -88,5 +88,133 @@ object Util {
     player.shotBoard.grid.zipWithIndex.foreach{case(list,index) =>{print(index + " | ")
     list.foreach(x => print(x + " "))
     println()}}
+  }
+
+  /**
+    * Function to create the 5 Ship for a Player
+    * @param player : the Player to who we want to add ship
+    * @return : the new Player with his shipgrid updated
+    */
+  def create_fleet(player : Player): Player ={
+    //If the player is human
+    if(player.iA == 0){
+      val nameShip = "Destroyer"
+      promptAskXCoord(nameShip)
+      val inputX = getUserInputInt()
+      promptAskYCoord(nameShip)
+      val inputY = getUserInputInt()
+      promptAskOrientationCoord(nameShip)
+      val inputOrientation = getUserInputString()
+      val nplayer1 = player.create_Ship(inputX, inputY, inputOrientation, nameShip)
+      if (!nplayer1.isEmpty){
+        val nameShip = "Submarine"
+        promptAskXCoord(nameShip)
+        val inputX = getUserInputInt()
+        promptAskYCoord(nameShip)
+        val inputY = getUserInputInt()
+        promptAskOrientationCoord(nameShip)
+        val inputOrientation = getUserInputString()
+        val nplayer = nplayer1.get.create_Ship(inputX, inputY, inputOrientation, nameShip)
+        if (!nplayer.isEmpty){
+          val nameShip = "Cruiser"
+          promptAskXCoord(nameShip)
+          val inputX = getUserInputInt()
+          promptAskYCoord(nameShip)
+          val inputY = getUserInputInt()
+          promptAskOrientationCoord(nameShip)
+          val inputOrientation = getUserInputString()
+          val nplayer1 = nplayer.get.create_Ship(inputX, inputY, inputOrientation, nameShip)
+          if(!nplayer1.isEmpty){
+            val nameShip = "Battleship"
+            promptAskXCoord(nameShip)
+            val inputX = getUserInputInt()
+            promptAskYCoord(nameShip)
+            val inputY = getUserInputInt()
+            promptAskOrientationCoord(nameShip)
+            val inputOrientation = getUserInputString()
+            val nplayer = nplayer1.get.create_Ship(inputX, inputY, inputOrientation, nameShip)
+            if(!nplayer.isEmpty){
+              val nameShip = "Carrier"
+              promptAskXCoord(nameShip)
+              val inputX = getUserInputInt()
+              promptAskYCoord(nameShip)
+              val inputY = getUserInputInt()
+              promptAskOrientationCoord(nameShip)
+              val inputOrientation = getUserInputString()
+              val nplayer1 = nplayer.get.create_Ship(inputX, inputY, inputOrientation, nameShip)
+              if(!nplayer1.isEmpty){
+                return nplayer1.get
+              }else{
+                print("You miss when you create your ship, you must restart\n")
+                return create_fleet(player)
+              }
+            }else{
+              print("You miss when you create your ship, you must restart\n")
+              return create_fleet(player)
+            }
+          }else{
+            print("You miss when you create your ship, you must restart\n")
+            return create_fleet(player)
+          }
+        }else{
+          print("You miss when you create your ship, you must restart\n")
+          return create_fleet(player)
+        }
+      }else{
+        print("You miss when you create your ship, you must restart\n")
+        return create_fleet(player)
+      }
+    }else{
+      val OrientList = List("H","V")
+      val randX = Random
+      val randY = Random
+      val randOrient = Random
+      var nameShip = "Destroyer"
+      var x = randX.nextInt(10)
+      var y = randY.nextInt(10)
+      var orientation = OrientList(randOrient.nextInt(2))
+      val nplayer1 = player.create_Ship(Some(x), Some(y), orientation, nameShip)
+      if(!nplayer1.isEmpty){
+        x = randX.nextInt(10)
+        y = randY.nextInt(10)
+        nameShip = "Submarine"
+        orientation = OrientList(randOrient.nextInt(2))
+        val nplayer2 = nplayer1.get.create_Ship(Some(x), Some(y), orientation, nameShip)
+        if(!nplayer2.isEmpty){
+          x = randX.nextInt(10)
+          y = randY.nextInt(10)
+          nameShip = "Cruiser"
+          orientation = OrientList(randOrient.nextInt(2))
+          val nplayer3 = nplayer2.get.create_Ship(Some(x), Some(y), orientation, nameShip)
+          if(!nplayer3.isEmpty){
+            x = randX.nextInt(10)
+            y = randY.nextInt(10)
+            nameShip = "Battleship"
+            orientation = OrientList(randOrient.nextInt(2))
+            val nplayer4 = nplayer3.get.create_Ship(Some(x), Some(y), orientation, nameShip)
+            if(!nplayer4.isEmpty){
+              x = randX.nextInt(10)
+              y = randY.nextInt(10)
+              nameShip = "Carrier"
+              orientation = OrientList(randOrient.nextInt(2))
+              val nplayerf = nplayer4.get.create_Ship(Some(x), Some(y), orientation, nameShip)
+              if(!nplayerf.isEmpty){
+                return nplayerf.get
+              }else{
+                return create_fleet(player)
+              }
+            }else{
+              return create_fleet(player)
+            }
+          }else{
+            return create_fleet(player)
+          }
+        }else{
+          return create_fleet(player)
+        }
+      }else{
+        return create_fleet(player)
+      }
+    }
   }
 }
