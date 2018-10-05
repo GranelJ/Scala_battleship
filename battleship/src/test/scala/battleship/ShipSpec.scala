@@ -19,12 +19,12 @@ class ShipSpec extends FlatSpec with Matchers {
     ship3.size() shouldEqual 3
   }
 
-  val boardTest : Board = Board(List(List(0,0,0,0,0,0,0,0,0,0),List(0,0,5,5,5,5,5,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0)))
-  val boardTest2 : Board = Board(List(List(0,0,0,0,0,0,0,0,0,0),List(0,0,5,5,-1,-1,5,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,-1,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,-1,0,0,0,0,0),List(0,0,0,0,0,0,1,1,0,0),List(0,0,0,0,0,0,0,0,0,0)))
-  val boardTest3 : Board = Board(List(List(0,0,0,0,0,0,0,0,0,2),List(0,0,-1,-1,-1,-1,-1,0,0,2),List(0,0,0,0,0,0,0,0,0,2),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,-1,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,-1,0,0,0,0,0),List(0,0,0,0,0,0,1,1,0,0),List(0,0,0,0,0,0,0,0,0,0)))
+  val boardTestShip1 : Board = Board(List(List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,5,5,5,5,5,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0)))
+  val boardTest2Ship1 : Board = Board(List(List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,5,5,5,-1,-1,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,-1,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,-1,0,0,0,0,0),List(0,0,0,0,0,0,1,1,0,0),List(0,0,0,0,0,0,0,0,0,0)))
+  val boardTest3Ship1 : Board = Board(List(List(0,0,0,0,0,0,0,0,0,2),List(0,0,-1,-1,-1,-1,-1,0,0,2),List(0,-1,-1,-1,-1,-1,0,0,0,2),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,-1,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,-1,0,0,0,0,0),List(0,0,0,0,0,0,1,1,0,0),List(0,0,0,0,0,0,0,0,0,0)))
   "The Ship method is_Sunk" should "return true if the ship is sunk" in {
-    ship1.is_Sunk(boardTest) shouldEqual false
-    ship1.is_Sunk(boardTest2) shouldEqual false
-    ship1.is_Sunk(boardTest3) shouldEqual true
+    ship1.is_Sunk(boardTestShip1) shouldEqual false
+    ship1.is_Sunk(boardTest2Ship1) shouldEqual false
+    ship1.is_Sunk(boardTest3Ship1) shouldEqual true
   }
 }

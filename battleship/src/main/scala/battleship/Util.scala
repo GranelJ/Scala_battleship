@@ -50,7 +50,6 @@ object Util {
 
   /**
     * Function to prompt the message asking for x coordinate for shot
-    * @param name
     */
   def promptAskXCoordShot() : Unit = {
     print(s"Please enter the X coordinate for your shot between 0 and 9\n")
@@ -67,7 +66,16 @@ object Util {
     * Function to prompt the message when shot hasn't hit
     */
   def promptShotMiss() : Unit = {
-    println("Shot as Miss")
+    println("Shot as miss")
+    getUserInputString()
+  }
+
+  /**
+    * Function to prompt the message when shot hasn't hit
+    */
+  def promptShotHit() : Unit = {
+    println("Shot as hit")
+    getUserInputString()
   }
 
   /**
@@ -76,6 +84,7 @@ object Util {
     */
   def promptShipSunk(ship : Ship) : Unit = {
     println(s"You sunk the opponent ${ship.name}")
+    getUserInputString()
   }
 
   /**
@@ -175,23 +184,28 @@ object Util {
               if(!nplayer1.isEmpty){
                 return nplayer1.get
               }else{
-                print("You miss when you create your ship, you must restart\n")
+                print("You miss when you create your ship, you must restart\n" +
+                  "-------------------------------------------\n")
                 return create_fleet(player)
               }
             }else{
-              print("You miss when you create your ship, you must restart\n")
+              print("You miss when you create your ship, you must restart\n" +
+              "-------------------------------------------\n")
               return create_fleet(player)
             }
           }else{
-            print("You miss when you create your ship, you must restart\n")
+            print("You miss when you create your ship, you must restart\n" +
+              "-------------------------------------------\n")
             return create_fleet(player)
           }
         }else{
-          print("You miss when you create your ship, you must restart\n")
+          print("You miss when you create your ship, you must restart\n" +
+            "-------------------------------------------\n")
           return create_fleet(player)
         }
       }else{
-        print("You miss when you create your ship, you must restart\n")
+        print("You miss when you create your ship, you must restart\n" +
+          "-------------------------------------------\n")
         return create_fleet(player)
       }
     }else{
