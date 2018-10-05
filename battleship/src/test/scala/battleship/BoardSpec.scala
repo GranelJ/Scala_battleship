@@ -104,4 +104,10 @@ class BoardSpec extends FlatSpec with Matchers {
     boardTest.as_Ship() shouldEqual true
     boardTest2.as_Ship() shouldEqual true
   }
+
+  "The Board getValGrid method" should "return the value in the grid at the coord x,y" in {
+    board.getValGrid(0,0) shouldEqual 0
+    boardTest.getValGrid(5,4) shouldEqual 0
+    boardTest2.getValGrid(1,1) shouldEqual 4
+  }
 }

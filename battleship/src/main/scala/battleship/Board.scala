@@ -169,4 +169,15 @@ case class Board (grid : List[List[Int]] = List.fill(10)(List.fill(10)(0))){
     val as_Ship = flattenGrid.filter(x => x > 0)
     return !as_Ship.isEmpty
     }
+
+  /**
+    * Function to get the value of a coordinate
+    * @param x : x coordinate to evaluate
+    * @param y : y coordinate to evaluate
+    * @return : the value at x,y in the grid
+    */
+  def getValGrid(x: Int, y : Int) : Int = {
+    val valCoord = this.grid(y)(x)
+    return valCoord
+  }
 }
