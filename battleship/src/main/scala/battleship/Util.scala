@@ -48,6 +48,12 @@ object Util {
   }
 
   /**
+    * Function to prompt the restart message
+    */
+  def promptRestart() : Unit = {
+    println("If you want to restart a game enter 'R', else press any key to exit")
+  }
+  /**
     * Function to prompt the message asking for x coordinate
     * @param name : the name of the Ship for which we are asking the coordinate
     */
@@ -309,7 +315,7 @@ object Util {
       //shot random but where it hasn't shot yet
       val inputX = randX.nextInt(10)
       val inputY = randY.nextInt(10)
-      if(player.shotBoard.getValGrid(inputX, inputY) > 0 ){
+      if(player.shotBoard.getValGrid(inputX, inputY) != -1 ){
         val coord = List(inputX, inputY)
         return coord
       }else{

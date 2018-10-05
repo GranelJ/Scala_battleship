@@ -49,8 +49,10 @@ case class Player(shipBoard : Board, shotBoard: Board, name : String, iA : Int =
     * @return : the player with their grid and shiplist updated if necessary
     */
   def shot(x : Int,  y: Int, opponent : Player): List[Player] ={
-      //Update shot grid of currently playing Player
-      val nShotBoard = this.shotBoard.update_Grid_After_Shot(x, y)
+    //Update shot grid of currently playing Player
+    val nShotBoard = this.shotBoard.update_Grid_After_Shot(x, y)
+    //if human
+    if(this.iA == 0){
       //if hit
       if(opponent.shipBoard.shot_As_Hit(x,y)){
         promptShotHit()
@@ -85,5 +87,38 @@ case class Player(shipBoard : Board, shotBoard: Board, name : String, iA : Int =
         val nCurrent = this.copy(shotBoard = nShotBoard)
         return List(nOpponent, nCurrent)
       }
+    //AI player
+    }else{
+      if(opponent.shipBoard.shot_As_Hit(x,y)){
+        //Update opponent shipboard so he can see where current player as shot
+        val nOpponentShipBoard = opponent.shipBoard.update_Grid_After_Shot(x,y)
+        //Update the opponent with his new shipboard
+        val nOpponent = opponent.copy(shipBoard = nOpponentShipBoard)
+        //Look if a ship is sunk and return his index, -1 if no ship are sunk
+        val index = nOpponent.shipList.indexWhere(ship => ship.is_Sunk(nOpponent.shipBoard))
+        //if no ship is sunk
+        if(index == -1){
+          //Update de players
+          val nCurrent = this.copy(shotBoard = nShotBoard)
+          return List(nOpponent, nCurrent)
+        }else{
+          //Get the sunk ship
+          val sunkShip = nOpponent.shipList(index)
+          //Update opponent shipList
+          val nOpponentShipList = nOpponent.shipList.filter(ship => ship != sunkShip)
+          //Update de players
+          val newOpponent = nOpponent.copy(shipList = nOpponentShipList)
+          val nCurrent = this.copy(shotBoard = nShotBoard)
+          return List(newOpponent, nCurrent)
+        }
+      }else{
+        //Update opponent shipboard so he can see where current player as shot
+        val nOpponentShipBoard = opponent.shipBoard.update_Grid_After_Shot(x,y)
+        //Update de players
+        val nOpponent = opponent.copy(shipBoard = nOpponentShipBoard)
+        val nCurrent = this.copy(shotBoard = nShotBoard)
+        return List(nOpponent, nCurrent)
+      }
+    }
   }
 }

@@ -6,12 +6,11 @@ import Util._
 object Main extends App{
   ChooseMod()
 
-  //TODO : clear console en fin de tour
   /**
     * Loop to manage the game with Human
     * @param gameState : the gameState to play
     */
-  def mainLoopHuman(gameState: GameState, randX : Random, randY : Random): Unit = {
+  def mainLoop(gameState: GameState, randX : Random, randY : Random): Unit = {
     val currentPlayer = gameState.getActivePlayer()
     val opponentPlayer = gameState.getOpponentPlayer()
     val shotCoord = askCoord(currentPlayer, randX, randY)
@@ -20,15 +19,17 @@ object Main extends App{
     val nCurrent = nListPlayer.last
     if(nOpponent.as_Lost()){
       println(s"${currentPlayer.name} WIN")
+      promptRestart()
+      getUserInputString() match {
+        case "R" => ChooseMod()
+        case _ =>
+      }
     }else{
       val nGameState = GameState(Set(nOpponent, nCurrent))
-      mainLoopHuman(nGameState, randX, randY)
+      mainLoop(nGameState, randX, randY)
     }
   }
 
-  def mainLoopIA(gameState: GameState, randX : Random, randY : Random) : Unit = {
-
-  }
   /**
     * Function that manage when the user choose his mod
     * @return : gameState used for the main loop
@@ -51,7 +52,7 @@ object Main extends App{
         val randX = Random
         val randY = Random
         val gameState = GameState(Set(nplayer1, nplayer2))
-        mainLoopHuman(gameState, randX, randY)
+        mainLoop(gameState, randX, randY)
       }
       case Some(2) => {
         promptEnterName()
@@ -64,7 +65,7 @@ object Main extends App{
         val randY = Random
         val nplayer2 = create_fleet(player2)
         val gameState = GameState(Set(nplayer1, nplayer2))
-        mainLoopHuman(gameState, randX, randY)
+        mainLoop(gameState, randX, randY)
       }
       case Some(3) => {
         promptEnterName()
@@ -77,7 +78,7 @@ object Main extends App{
         promptBoards(nplayer1)
         val nplayer2 = create_fleet(player2)
         val gameState = GameState(Set(nplayer1, nplayer2))
-        mainLoopHuman(gameState, randX, randY)
+        mainLoop(gameState, randX, randY)
       }
       case Some(4) => {
         promptEnterName()
@@ -90,7 +91,7 @@ object Main extends App{
         promptBoards(nplayer1)
         val nplayer2 = create_fleet(player2)
         val gameState = GameState(Set(nplayer1, nplayer2))
-        mainLoopHuman(gameState, randX, randY)
+        mainLoop(gameState, randX, randY)
       }
       case Some(5) => {
         val player1 = Player(Board(), Board(),"AI-easy", 1)
@@ -100,7 +101,7 @@ object Main extends App{
         val nplayer1 = create_fleet(player1)
         val nplayer2 = create_fleet(player2)
         val gameState = GameState(Set(nplayer1, nplayer2))
-
+        mainLoop(gameState, randX, randY)
       }
       case Some(6) => {
         val player1 = Player(Board(), Board(),"AI-medium", 2)
@@ -110,7 +111,7 @@ object Main extends App{
         val nplayer1 = create_fleet(player1)
         val nplayer2 = create_fleet(player2)
         val gameState = GameState(Set(nplayer1, nplayer2))
-
+        mainLoop(gameState, randX, randY)
       }
       case _ => {
         print("You must enter a number between 1 and 6 !\n")
