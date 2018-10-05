@@ -49,6 +49,36 @@ object Util {
   }
 
   /**
+    * Function to prompt the message asking for x coordinate for shot
+    * @param name
+    */
+  def promptAskXCoordShot() : Unit = {
+    print(s"Please enter the X coordinate for your shot between 0 and 9\n")
+  }
+
+  /**
+    * Function to prompt the message asking for y coordinate for shot
+    */
+  def promptAskYCoordShot() : Unit = {
+    print(s"Please enter the Y coordinate for your shot between 0 and 9\n")
+  }
+
+  /**
+    * Function to prompt the message when shot hasn't hit
+    */
+  def promptShotMiss() : Unit = {
+    println("Shot as Miss")
+  }
+
+  /**
+    * Function to prompt the message when a ship is sunk
+    * @param ship : the ship sunkk
+    */
+  def promptShipSunk(ship : Ship) : Unit = {
+    println(s"You sunk the opponent ${ship.name}")
+  }
+
+  /**
     * Function to prompt the message asking for y coordinate
     * @param name : the name of the Ship for which we are asking the coordinate
     */
