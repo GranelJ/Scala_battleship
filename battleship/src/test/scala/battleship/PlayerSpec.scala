@@ -16,7 +16,7 @@ class PlayerSpec extends FlatSpec with Matchers {
     }
 
   "The Player method create_Ship" should "return a new player with his shipboard updated if the ship can be place" in {
-    player.create_Ship(Some(1),Some(2),"H","Destroyer").get shouldEqual player.copy(shipBoard = Board(List(List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,1,1,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0))))
+    player.create_Ship(Some(1),Some(2),"H","Destroyer").get shouldEqual player.copy(shipBoard = Board(List(List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,1,1,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0),List(0,0,0,0,0,0,0,0,0,0))), shipList = player.shipList :+ Ship(1,2,true,"Destroyer"))
     player2.create_Ship(Some(1),Some(1),"V","Submarine") shouldEqual None
     player.create_Ship(None, Some(1),"V","Submarine") shouldEqual None
   }
