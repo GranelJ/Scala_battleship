@@ -261,4 +261,52 @@ object Util {
       }
     }
   }
+
+  /**
+    * Function to ask a player where he wants to shot
+    * @param player : the player to who we ask
+    * @param randX : random X if the player is an IA
+    * @param randY : random Y if the player is an IA
+    * @return : a List[Int] with the coordinate of the shot
+    */
+  def askCoord(player : Player, randX : Random, randY : Random): List[Int] ={
+    if(player.iA == 0){
+      promptBoards(player)
+      promptAskXCoordShot()
+      val inputX = getUserInputInt()
+      if (!inputX.isEmpty){
+        promptAskYCoordShot()
+        val inputY = getUserInputInt()
+        if(!inputY.isEmpty){
+          val coord = List(inputX.get, inputY.get)
+          return coord
+        }else{
+          println("You should enter a number between 0 and 9 !")
+          askCoord(player, randX, randY)
+        }
+      }else{
+        println("You should enter a number between 0 and 9 !")
+        askCoord(player, randX, randY)
+      }
+      //if AI
+    }else if(player.iA == 1){
+      //random shot
+      val inputX = randX.nextInt(10)
+      val inputY = randY.nextInt(10)
+      return List(inputX, inputY)
+    }else if(player.iA == 2){
+      //shot random but where it hasn't shot yet
+      val inputX = randX.nextInt(10)
+      val inputY = randY.nextInt(10)
+      if(player.shotBoard.getValGrid(inputX, inputY) > 0 ){
+        val coord = List(inputX, inputY)
+        return coord
+      }else{
+        askCoord(player, randX, randY)
+      }
+    }else{
+      //TODO : IA hard
+      return List(1,1)
+    }
+  }
 }

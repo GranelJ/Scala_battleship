@@ -6,39 +6,65 @@ import Util._
 object Main extends App{
   ChooseMod()
 
-  //TODO : clear console en fin de tour
+  //TODO : clear console en fin de tour et modifier avec nouvelle func de Util askCoord()
   /**
     * Loop to manage the game with Human
     * @param gameState : the gameState to play
     */
-  def mainLoopHuman(gameState: GameState): Unit = {
+  def mainLoopHuman(gameState: GameState, randX : Random, randY : Random): Unit = {
     val currentPlayer = gameState.getActivePlayer()
     val opponentPlayer = gameState.getOpponentPlayer()
-    promptBoards(currentPlayer)
-    promptAskXCoordShot()
-    val inputX = getUserInputInt()
-    if (!inputX.isEmpty){
-      promptAskYCoordShot()
-      val inputY = getUserInputInt()
-      if(!inputY.isEmpty){
-        val nPlayerList = currentPlayer.shot(inputX.get, inputY.get, opponentPlayer)
-        val nOpponent = nPlayerList.head
-        val nCurrent = nPlayerList.last
-        //TODO : Modify for real win message maybe name player
-        if(nOpponent.as_Lost()){
-          println("YOU WIN")
+    // if human player
+    if(currentPlayer.iA == 0){
+      promptBoards(currentPlayer)
+      promptAskXCoordShot()
+      val inputX = getUserInputInt()
+      if (!inputX.isEmpty){
+        promptAskYCoordShot()
+        val inputY = getUserInputInt()
+        if(!inputY.isEmpty){
+          val nPlayerList = currentPlayer.shot(inputX.get, inputY.get, opponentPlayer)
+          val nOpponent = nPlayerList.head
+          val nCurrent = nPlayerList.last
+          //TODO : Modify for real win message maybe name player
+          if(nOpponent.as_Lost()){
+            println("YOU WIN")
+          }else{
+            val nGameState = GameState(Set(nOpponent, nCurrent))
+            mainLoopHuman(nGameState, randX, randY)
+          }
         }else{
-          val nGameState = GameState(Set(nOpponent, nCurrent))
-          mainLoopHuman(nGameState)
+          println("You should enter a number between 0 and 9 !")
+          mainLoopHuman(gameState, randX, randY)
         }
       }else{
         println("You should enter a number between 0 and 9 !")
-        mainLoopHuman(gameState)
+        mainLoopHuman(gameState, randX, randY)
       }
-    }else{
-      println("You should enter a number between 0 and 9 !")
-      mainLoopHuman(gameState)
+      //if AI
+    }else{/**
+      val inputX = randX.nextInt(10)
+      if (!inputX.isEmpty){
+        val inputY = getUserInputInt()
+        if(!inputY.isEmpty){
+          val nPlayerList = currentPlayer.shot(inputX.get, inputY.get, opponentPlayer)
+          val nOpponent = nPlayerList.head
+          val nCurrent = nPlayerList.last
+          //TODO : Modify for real win message maybe name player
+          if(nOpponent.as_Lost()){
+            println("YOU WIN")
+          }else{
+            val nGameState = GameState(Set(nOpponent, nCurrent))
+            mainLoopHuman(nGameState, randX, randY)
+          }
+        }else{
+          mainLoopHuman(gameState, randX, randY)
+        }
+      }else{
+        mainLoopHuman(gameState, randX, randY)
+      }**/
     }
+
   }
 
   def mainLoopIA(gameState: GameState, randX : Random, randY : Random, randOrien : Random) : Unit = {
@@ -59,16 +85,21 @@ object Main extends App{
         promptBoards(nplayer1)
         val nplayer2 = create_fleet(player2)
         promptBoards(nplayer2)
+        val randX = Random
+        val randY = Random
         val gameState = GameState(Set(nplayer1, nplayer2))
-        mainLoopHuman(gameState)
+        mainLoopHuman(gameState, randX, randY)
       }
       case Some(2) => {
         val player1 = Player(Board(), Board())
         val player2 = Player(Board(), Board(), 1)
         val nplayer1 = create_fleet(player1)
         promptBoards(nplayer1)
+        val randX = Random
+        val randY = Random
         val nplayer2 = create_fleet(player2)
         val gameState = GameState(Set(nplayer1, nplayer2))
+        mainLoopHuman(gameState, randX, randY)
       }
       case Some(3) => {
         val player1 = Player(Board(), Board())
@@ -79,7 +110,7 @@ object Main extends App{
         promptBoards(nplayer1)
         val nplayer2 = create_fleet(player2)
         val gameState = GameState(Set(nplayer1, nplayer2))
-
+        mainLoopHuman(gameState, randX, randY)
       }
       case Some(4) => {
         val player1 = Player(Board(), Board())
@@ -90,7 +121,7 @@ object Main extends App{
         promptBoards(nplayer1)
         val nplayer2 = create_fleet(player2)
         val gameState = GameState(Set(nplayer1, nplayer2))
-
+        mainLoopHuman(gameState, randX, randY)
       }
       case Some(5) => {
         val player1 = Player(Board(), Board(), 1)

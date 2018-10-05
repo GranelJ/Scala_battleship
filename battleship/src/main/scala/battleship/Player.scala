@@ -41,8 +41,14 @@ case class Player(shipBoard : Board, shotBoard: Board, iA : Int = 0, shipList : 
     return None
   }
 
+  /**
+    * Function to evaluate a shot
+    * @param x : the x coordinate of the shot
+    * @param y : the y coordinate of the shot
+    * @param opponent : the opponent player
+    * @return : the player with their grid and shiplist updated if necessary
+    */
   def shot(x : Int,  y: Int, opponent : Player): List[Player] ={
-    if(this.iA == 0){
       //Update shot grid of currently playing Player
       val nShotBoard = this.shotBoard.update_Grid_After_Shot(x, y)
       //if hit
@@ -79,14 +85,6 @@ case class Player(shipBoard : Board, shotBoard: Board, iA : Int = 0, shipList : 
         val nOpponent = opponent.copy(shipBoard = nOpponentShipBoard)
         val nCurrent = this.copy(shotBoard = nShotBoard)
         return List(nOpponent, nCurrent)
-      }/**TODO : AI
-    }else if (this.iA == 1){
-
-    }else if (this.iA == 2){
-    **/
-    }else{
-      print("PAS D'IA")
-      return List(this, opponent)
-    }
+      }
   }
 }
