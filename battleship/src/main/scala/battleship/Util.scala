@@ -41,11 +41,26 @@ object Util {
   }
 
   /**
+    * Function to ask for a pseudo
+    */
+  def promptEnterName() : Unit = {
+    println("Please, enter your pseudo")
+  }
+
+  /**
     * Function to prompt the message asking for x coordinate
     * @param name : the name of the Ship for which we are asking the coordinate
     */
   def promptAskXCoord(name : String) : Unit = {
     print(s"Please enter the X coordinate of your ${name} between 0 and 9\n")
+  }
+
+  /**
+    * Function to prompt the message asking for y coordinate
+    * @param name : the name of the Ship for which we are asking the coordinate
+    */
+  def promptAskYCoord(name : String) : Unit = {
+    print(s"Please enter the Y coordinate of your ${name} between 0 and 9\n")
   }
 
   /**
@@ -60,6 +75,10 @@ object Util {
     */
   def promptAskYCoordShot() : Unit = {
     print(s"Please enter the Y coordinate for your shot between 0 and 9\n")
+  }
+
+  def promptWrongInput() : Unit = {
+    println("You should enter a number between 0 and 9 !")
   }
 
   /**
@@ -85,14 +104,6 @@ object Util {
   def promptShipSunk(ship : Ship) : Unit = {
     println(s"You sunk the opponent ${ship.name}")
     getUserInputString()
-  }
-
-  /**
-    * Function to prompt the message asking for y coordinate
-    * @param name : the name of the Ship for which we are asking the coordinate
-    */
-  def promptAskYCoord(name : String) : Unit = {
-    print(s"Please enter the Y coordinate of your ${name} between 0 and 9\n")
   }
 
   /**
@@ -274,18 +285,18 @@ object Util {
       promptBoards(player)
       promptAskXCoordShot()
       val inputX = getUserInputInt()
-      if (!inputX.isEmpty){
+      if (!inputX.isEmpty && inputX.get < 10){
         promptAskYCoordShot()
         val inputY = getUserInputInt()
-        if(!inputY.isEmpty){
+        if(!inputY.isEmpty && inputY.get < 10){
           val coord = List(inputX.get, inputY.get)
           return coord
         }else{
-          println("You should enter a number between 0 and 9 !")
+          promptWrongInput()
           askCoord(player, randX, randY)
         }
       }else{
-        println("You should enter a number between 0 and 9 !")
+        promptWrongInput()
         askCoord(player, randX, randY)
       }
       //if AI

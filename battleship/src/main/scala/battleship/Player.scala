@@ -3,7 +3,7 @@ package battleship
 import Util._
 
 //iA = 0 means player is human
-case class Player(shipBoard : Board, shotBoard: Board, iA : Int = 0, shipList : List[Ship] = List()){
+case class Player(shipBoard : Board, shotBoard: Board, name : String, iA : Int = 0, shipList : List[Ship] = List()){
 
   /**
     * Function to know if a Player as lost
@@ -71,7 +71,6 @@ case class Player(shipBoard : Board, shotBoard: Board, iA : Int = 0, shipList : 
           val sunkShip = nOpponent.shipList(index)
           //Update opponent shipList
           val nOpponentShipList = nOpponent.shipList.filter(ship => ship != sunkShip)
-          print(nOpponentShipList)
           //Update de players
           val newOpponent = nOpponent.copy(shipList = nOpponentShipList)
           val nCurrent = this.copy(shotBoard = nShotBoard)
