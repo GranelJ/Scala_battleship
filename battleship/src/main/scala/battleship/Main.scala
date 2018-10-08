@@ -143,6 +143,14 @@ object Main extends App{
     }
   }
 
+  /**
+    * Function to manage the restart for proof loop
+    * @param player1 : first player of the game
+    * @param player2 : second player of the game
+    * @param randX : randX used by the AI to generate a value for the X coordinate of the shot
+    * @param randY : randY used by the AI to generate a value for the Y coordinate of the shot
+    * @param iterator : iterator to know how much game are done
+    */
   def ProofFleet(player1 : Player, player2 : Player, randX : Random, randY : Random, iterator : Int) : Unit = {
     if(iterator == 100){
       println(s"${player1.name} number of win : ${player1.score}")
