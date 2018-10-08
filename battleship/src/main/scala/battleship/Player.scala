@@ -2,8 +2,8 @@ package battleship
 
 import Util._
 
-//iA = 0 means player is human
-case class Player(shipBoard : Board, shotBoard: Board, name : String, iA : Int = 0, shipList : List[Ship] = List(),score : Int = 0){
+//aI = 0 means player is human
+case class Player(shipBoard : Board, shotBoard: Board, name : String, aI : Int = 0, shipList : List[Ship] = List(),score : Int = 0){
 
   /**
     * Function to know if a Player as lost
@@ -52,7 +52,7 @@ case class Player(shipBoard : Board, shotBoard: Board, name : String, iA : Int =
     //Update shot grid of currently playing Player
     val nShotBoard = this.shotBoard.update_Grid_After_Shot(x, y)
     //if human
-    if(this.iA == 0){
+    if(this.aI == 0){
       //if hit
       if(opponent.shipBoard.shot_As_Hit(x,y)){
         promptShotHit()

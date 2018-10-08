@@ -155,7 +155,7 @@ object Util {
     */
   def create_fleet(player : Player): Player ={
     //If the player is human
-    if(player.iA == 0){
+    if(player.aI == 0){
       val nameShip = "Destroyer"
       promptAskXCoord(nameShip)
       val inputX = getUserInputInt()
@@ -284,12 +284,12 @@ object Util {
   /**
     * Function to ask a player where he wants to shot
     * @param player : the player to who we ask
-    * @param randX : random X if the player is an IA
-    * @param randY : random Y if the player is an IA
+    * @param randX : random X if the player is an aI
+    * @param randY : random Y if the player is an aI
     * @return : a List[Int] with the coordinate of the shot
     */
   def askCoord(player : Player, opponent : Player, randX : Random, randY : Random): List[Int] ={
-    if(player.iA == 0){
+    if(player.aI == 0){
       promptBoards(player)
       promptAskXCoordShot()
       val inputX = getUserInputInt()
@@ -308,12 +308,12 @@ object Util {
         askCoord(player, opponent, randX, randY)
       }
       //if AI
-    }else if(player.iA == 1){
+    }else if(player.aI == 1){
       //random shot
       val inputX = randX.nextInt(10)
       val inputY = randY.nextInt(10)
       return List(inputX, inputY)
-    }else if(player.iA == 2){
+    }else if(player.aI == 2){
       //shot random but where it hasn't shot yet
       val inputX = randX.nextInt(10)
       val inputY = randY.nextInt(10)
@@ -324,7 +324,7 @@ object Util {
         askCoord(player, opponent, randX, randY)
       }
     }else{
-      //TODO : IA hard
+      //TODO : aI hard
       val inputX = randX.nextInt(10)
       val inputY = randY.nextInt(10)
       if(opponent.shipBoard.getValGrid(inputX, inputY) > 0){
