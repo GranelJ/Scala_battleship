@@ -3,7 +3,7 @@ package battleship
 import Util._
 
 //iA = 0 means player is human
-case class Player(shipBoard : Board, shotBoard: Board, name : String, iA : Int = 0, shipList : List[Ship] = List()){
+case class Player(shipBoard : Board, shotBoard: Board, name : String, iA : Int = 0, shipList : List[Ship] = List(),score : Int = 0){
 
   /**
     * Function to know if a Player as lost
