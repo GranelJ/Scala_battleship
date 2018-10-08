@@ -2,9 +2,12 @@ package battleship
 
 import scala.util.{Random, Try}
 import scala.io.StdIn.readLine
+import java.io.{BufferedWriter, FileWriter}
+import scala.collection.JavaConversions._
+import au.com.bytecode.opencsv.CSVWriter
 
 object Util {
-
+  var csvData : List[Array[String]] = List(Array())
   /**
     * Function to print the choices at the beginning of the game
     */
@@ -14,8 +17,7 @@ object Util {
     2 - Human vs Easy AI
     3 - Human vs Medium AI
     4 - Human vs Hard AI
-    5 - Easy AI vs Medium AI
-    6 - Medium AI vs Hard AI
+    5 - Proof
           """)
   }
 
@@ -286,7 +288,7 @@ object Util {
     * @param randY : random Y if the player is an IA
     * @return : a List[Int] with the coordinate of the shot
     */
-  def askCoord(player : Player, randX : Random, randY : Random): List[Int] ={
+  def askCoord(player : Player, opponent : Player, randX : Random, randY : Random): List[Int] ={
     if(player.iA == 0){
       promptBoards(player)
       promptAskXCoordShot()
@@ -299,11 +301,11 @@ object Util {
           return coord
         }else{
           promptWrongInput()
-          askCoord(player, randX, randY)
+          askCoord(player, opponent, randX, randY)
         }
       }else{
         promptWrongInput()
-        askCoord(player, randX, randY)
+        askCoord(player, opponent, randX, randY)
       }
       //if AI
     }else if(player.iA == 1){
@@ -319,11 +321,36 @@ object Util {
         val coord = List(inputX, inputY)
         return coord
       }else{
-        askCoord(player, randX, randY)
+        askCoord(player, opponent, randX, randY)
       }
     }else{
       //TODO : IA hard
-      return List(1,1)
+      val inputX = randX.nextInt(10)
+      val inputY = randY.nextInt(10)
+      if(opponent.shipBoard.getValGrid(inputX, inputY) > 0){
+        val coord = List(inputX, inputY)
+        return coord
+      }else {
+        askCoord(player, opponent, randX, randY)
+      }
     }
+  }
+
+
+  //TODO
+  def writeCSV() : Unit = {
+    val outputFile = new BufferedWriter(new FileWriter("./proof_ai.csv"))
+    val csvWriter = new CSVWriter(outputFile)
+    csvWriter.writeAll(csvData)
+    csvWriter.close()
+  }
+
+  /**
+    * Function to create the data for the csv
+    * @param player1 : the first player to save the name and score
+    * @param player2 : the second player to save the name and score
+    */
+  def prepCSV(player1 : Player, player2 : Player) : Unit = {
+    csvData = csvData :+ Array(player1.name, player1.score.toString, player2.name, player2.score.toString)
   }
 }
