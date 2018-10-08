@@ -307,12 +307,13 @@ object Util {
         promptWrongInput()
         askCoord(player, opponent, randX, randY)
       }
-      //if AI
+      //if AI easy
     }else if(player.aI == 1){
       //random shot
       val inputX = randX.nextInt(10)
       val inputY = randY.nextInt(10)
       return List(inputX, inputY)
+      //if AI medium
     }else if(player.aI == 2){
       //shot random but where it hasn't shot yet
       val inputX = randX.nextInt(10)
@@ -336,10 +337,11 @@ object Util {
     }
   }
 
-
-  //TODO
+  /**
+    * Function to create and write in a csv the result
+    */
   def writeCSV() : Unit = {
-    val outputFile = new BufferedWriter(new FileWriter("./proof_ai.csv"))
+    val outputFile = new BufferedWriter(new FileWriter("./ai_proof.csv"))
     val csvWriter = new CSVWriter(outputFile)
     csvWriter.writeAll(csvData)
     csvWriter.close()
